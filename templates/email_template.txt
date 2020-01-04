@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ email }},
+Welcome to DWA
+Please click on the link below to download the agreement form.
+
+{{ domain }}{% url 'pdf-download' email=email %}
+{% endautoescape %}
