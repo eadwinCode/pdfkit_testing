@@ -132,3 +132,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.getenv('EMAIL')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+
+WKTHTMLTOPDF_WINDOWS_PATH = 'C:\Program Files\wkhtmltopdf\\bin\wkhtmltopdf.exe'

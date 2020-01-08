@@ -1,4 +1,5 @@
 import pdfkit
+import platform
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse, Http404
@@ -63,13 +64,21 @@ class GenerateDownloadLink(generic.FormView):
         return response
 
 
+def get_pdf_content(html_content):
+    if platform.system() == 'Windows'
+        config = pdfkit.configuration(wkhtmltopdf=settings.WKTHTMLTOPDF_WINDOWS_PATH)
+        return pdfkit.from_string(html_content, False, options=pdfkit_options, configuration=config,
+                                  css=f"{settings.STATIC_ROOT}/css/bootstrap.min.css")
+    
+    return pdfkit.from_string(html_content, False, options=pdfkit_options, css=f"{settings.STATIC_ROOT}/css/bootstrap.min.css")
+
+
 class DownloadPDFView(generic.View):
     def get(self, request, *args, **kwargs):
         email = kwargs.get('email', None)
         if not email:
             return Http404(Exception('Invalid url'))
         html = render_to_string("pdf_template.html", {'email': email})
-        pdf = pdfkit.from_string(html, False, options=pdfkit_options,
-                                 css=f"{settings.STATIC_ROOT}/css/bootstrap.min.css")
+        pdf = get_pdf_content(html)
         response = HttpResponse(pdf, content_type='application/pdf')
         return response
