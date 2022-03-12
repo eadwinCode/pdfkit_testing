@@ -8,7 +8,7 @@ Django==2.2.2
 django-environ==0.4.5
 html5lib==1.0.1
 pdfkit==0.6.1
-Pillow==7.0.0
+Pillow==9.0.1
 pycparser==2.19
 Pyphen==0.9.5
 python-dotenv==0.10.3
